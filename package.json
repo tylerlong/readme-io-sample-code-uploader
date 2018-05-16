@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "node -r babel-polyfill -r babel-register src/index.js"
+    "test": "node -r babel-polyfill -r babel-register src/index.js && open temp.png"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
