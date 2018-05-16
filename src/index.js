@@ -11,7 +11,11 @@ const DEBUG = true
 ;(async () => {
   const browser = await puppeteer.launch({ headless: !DEBUG })
   const page = await browser.newPage()
-  page.setDefaultNavigationTimeout(16000)
+  let navigationTimeout = 30000
+  if (process.env.PUPPETEER_NAVIGATION_TIMEOUT) {
+    navigationTimeout = parseInt(process.env.PUPPETEER_NAVIGATION_TIMEOUT)
+  }
+  page.setDefaultNavigationTimeout(navigationTimeout)
   page.setViewport({ width: 1280, height: 800 })
 
   await page.goto('https://dash.readme.io/login', { waitUntil: 'networkidle2' })
