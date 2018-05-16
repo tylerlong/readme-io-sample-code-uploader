@@ -10,7 +10,7 @@ edit .env
 ```
 
 
-## Sample code directory structure structure
+## Sample code directory structure
 
 ```
 restapi__v1.0__account__{accountId}__extension__{extensionId}__call-log/
