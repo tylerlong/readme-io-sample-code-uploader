@@ -1,0 +1,13 @@
+import onml from 'onml'
+import * as R from 'ramda'
+
+const json = onml.p(`<select ng-model="data.codes[current].language" ng-change="changeMode(current)" class="full-width ng-valid ng-dirty ng-touched" ng-options="type[0] as type[1] for type in code_types"><option value="0" selected="selected" label="Text">Text</option><option value="1" label="ASP">ASP</option><option value="2" label="C">C</option><option value="3" label="CoffeeScript">CoffeeScript</option><option value="4" label="Clojure">Clojure</option><option value="5" label="C++">C++</option><option value="6" label="C#">C#</option><option value="7" label="CSS">CSS</option><option value="8" label="cURL">cURL</option><option value="9" label="Cypher">Cypher</option><option value="10" label="D">D</option><option value="11" label="Erlang">Erlang</option><option value="12" label="Go">Go</option><option value="13" label="Groovy">Groovy</option><option value="14" label="Handlebars">Handlebars</option><option value="15" label="HAML">HAML</option><option value="16" label="Haxe">Haxe</option><option value="17" label="HTML">HTML</option><option value="18" label="HTTP">HTTP</option><option value="19" label="Java">Java</option><option value="20" label="JavaScript">JavaScript</option><option value="21" label="Jinja2">Jinja2</option><option value="22" label="JSON">JSON</option><option value="23" label="Julia">Julia</option><option value="24" label="LESS">LESS</option><option value="25" label="Liquid">Liquid</option><option value="26" label="Lua">Lua</option><option value="27" label="Markdown">Markdown</option><option value="28" label="MySQL">MySQL</option><option value="29" label="Objective-C">Objective-C</option><option value="30" label="Perl">Perl</option><option value="31" label="PHP">PHP</option><option value="32" label="Postgres">Postgres</option><option value="33" label="Python">Python</option><option value="34" label="R">R</option><option value="35" label="Ruby">Ruby</option><option value="36" label="Rust">Rust</option><option value="37" label="SASS">SASS</option><option value="38" label="Scala">Scala</option><option value="39" label="SCSS">SCSS</option><option value="40" label="Shell">Shell</option><option value="41" label="Smarty">Smarty</option><option value="42" label="SQL">SQL</option><option value="43" label="Stylus">Stylus</option><option value="44" label="Swift">Swift</option><option value="45" label="TOML">TOML</option><option value="46" label="Twig">Twig</option><option value="47" label="XML">XML</option><option value="48" label="YAML">YAML</option></select>`)
+
+const dict = {}
+R.pipe(
+  R.tail,
+  R.tail,
+  R.forEach(o => { dict[o[1].label] = o[1].value })
+)(json)
+
+export default dict

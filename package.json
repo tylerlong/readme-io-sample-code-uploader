@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "node -r babel-polyfill -r babel-register src/index.js && open temp.png"
+    "start": "node -r babel-polyfill -r babel-register src/index.js && open temp.png",
+    "test": "jest"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
+    "onml": "^0.4.1",
     "puppeteer": "^1.4.0",
+    "ramda": "^0.25.0",
     "timeout-as-promise": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "jest": "^22.4.3",
     "standard": "^11.0.1",
     "yarn-upgrade-all": "^0.3.0"
   }

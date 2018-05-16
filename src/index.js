@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 import puppeteer from 'puppeteer'
 import delay from 'timeout-as-promise'
 
+import { addSampleCode } from './utils'
+
 dotenv.config()
 
 const DEBUG = true
@@ -9,7 +11,7 @@ const DEBUG = true
 ;(async () => {
   const browser = await puppeteer.launch({ headless: !DEBUG })
   const page = await browser.newPage()
-  page.setDefaultNavigationTimeout(20000)
+  page.setDefaultNavigationTimeout(16000)
   page.setViewport({ width: 1280, height: 800 })
 
   await page.goto('https://dash.readme.io/login', { waitUntil: 'networkidle2' })
@@ -46,16 +48,31 @@ const DEBUG = true
   await page.mouse.up()
 
   // select programming language
-  await delay(100)
-  const languageSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.options > div > div.col-sm-4 > select'
-  await page.select(languageSelector, '33') // Python's <select> <option> value is 12
+  // await delay(100)
+  // const languageSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.options > div > div.col-sm-4 > select'
+  // await page.select(languageSelector, '33') // Python's <select> <option> value is 12
 
-  // write sample code
-  const codeMirrorSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.body > div > div.ng-pristine.ng-untouched.ng-valid > div > div.CodeMirror-scroll'
-  await page.click(codeMirrorSelector)
-  await page.keyboard.type('print "Hello world"')
+  // // write sample code
+  // const codeMirrorSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.body > div > div.ng-pristine.ng-untouched.ng-valid > div > div.CodeMirror-scroll'
+  // await page.click(codeMirrorSelector)
+  // await page.keyboard.type('print "Hello world"')
 
-  await delay(3000)
+  await addSampleCode(page, 'Python', 1, 'print "Hello world"')
+
+  // add programing language
+  const addLanguageSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.ace-header > div.pull-right > a'
+  await page.click(addLanguageSelector)
+
+  await addSampleCode(page, 'Ruby', 2, 'puts "hello world"')
+
+  // add programing language
+  await page.click(addLanguageSelector)
+  await addSampleCode(page, 'PHP', 3, `<?PHP
+  print_r("hello world")`)
+
+  if (DEBUG) {
+    await delay(1000)
+  }
   await page.screenshot({path: 'temp.png'})
-  await browser.close()
+  // await browser.close()
 })()

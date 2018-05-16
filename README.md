@@ -42,5 +42,5 @@ restapi__v1.0__account__{accountId}__extension__{extensionId}__call-log/
 ## Run
 
 ```
-yarn test
+yarn start
 ```
