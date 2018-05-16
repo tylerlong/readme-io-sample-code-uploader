@@ -2,11 +2,15 @@
   "name": "readme-io-sample-code-uploader",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "test": "node -r babel-polyfill -r babel-register src/index.js"
+  },
   "dependencies": {
     "dotenv": "^5.0.1",
     "puppeteer": "^1.4.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "standard": "^11.0.1",
