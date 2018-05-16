@@ -48,7 +48,12 @@ const DEBUG = true
   // select programming language
   await delay(100)
   const languageSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.options > div > div.col-sm-4 > select'
-  await page.select(languageSelector, '12') // GoLang's value is 12
+  await page.select(languageSelector, '33') // Python's <select> <option> value is 12
+
+  // write sample code
+  const codeMirrorSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.body > div > div.ng-pristine.ng-untouched.ng-valid > div > div.CodeMirror-scroll'
+  await page.click(codeMirrorSelector)
+  await page.keyboard.type('print "Hello world"')
 
   await delay(3000)
   await page.screenshot({path: 'temp.png'})
