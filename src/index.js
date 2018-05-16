@@ -38,6 +38,18 @@ const DEBUG = true
     // ignore Navigation Timeout Exceeded
   }
 
+  // remove existing ACE editors
+  page.once('dialog', dialog => { dialog.accept() })
+  const aceEditorSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code'
+  let aceEditor = await page.$(aceEditorSelector)
+  const removeEditorSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > section > a.block-option.fa.fa-times.ng-scope'
+  while (aceEditor !== null) {
+    const box = await aceEditor.boundingBox()
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+    await page.click(removeEditorSelector)
+    aceEditor = await page.$(aceEditorSelector)
+  }
+
   // drag & drop a code block
   const codeIconSelector = '#sticky1 > ul > li:nth-child(2) > a > i'
   const e = await page.$(codeIconSelector)
@@ -70,8 +82,9 @@ const DEBUG = true
   await addSampleCode(page, 'PHP', 3, `<?PHP
   print_r("hello world")`)
 
+  console.log('done')
   if (DEBUG) {
-    await delay(1000)
+    await delay(100000)
   }
   await page.screenshot({path: 'temp.png'})
   // await browser.close()
