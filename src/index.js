@@ -45,8 +45,10 @@ const DEBUG = true
   await page.mouse.move(box.x - 300, box.y + box.height / 2) // move to (100, 200) coordinates
   await page.mouse.up()
 
-  // const removeCodeSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > section > a.block-option.fa.fa-times.ng-scope'
-  // await page.click(removeCodeSelector)
+  // select programming language
+  await delay(100)
+  const languageSelector = '#page-editor > div.fill > div.ng-scope > div > div.block.ng-scope > div > div > div.block.section.type-code > div > div > div > div.ace-editor.block-edit-code > div.options > div > div.col-sm-4 > select'
+  await page.select(languageSelector, '12') // GoLang's value is 12
 
   await delay(3000)
   await page.screenshot({path: 'temp.png'})
