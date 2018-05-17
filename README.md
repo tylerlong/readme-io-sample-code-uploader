@@ -13,30 +13,21 @@ edit .env
 ## Sample code directory structure
 
 ```
-restapi__v1.0__account__{accountId}__extension__{extensionId}__call-log/
-    GET/
-        0/
-            request_header.txt
-            request_body.json
-            response_header.txt
-            response_body.json
-            index.py
-            index.java
-            index.cs
-            index.go
-            index.php
-    POST/
-        0/
-            request_header.txt
-            request_body.json
-            response_header.txt
-            response_body.json
-            index.py
-            index.java
-            index.cs
-            index.go
-            index.php
+getversioninfo/
+    index.py
+    index.java
+    index.cs
+    index.go
+    index.php
+loadextensioncalllog-1/
+    index.py
+    index.java
+    index.cs
+    index.go
+    index.php
 ```
+
+`loadextensioncalllog-1` is url slug from readme.io: https://dash.readme.io/project/ringcentral-api-reference/v1.0/refs/loadextensioncalllog-1
 
 
 ## Run
