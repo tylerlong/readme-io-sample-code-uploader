@@ -1,6 +1,8 @@
 import dotenv from 'dotenv'
 import puppeteer from 'puppeteer'
 import * as R from 'ramda'
+import fs from 'fs'
+import path from 'path'
 
 import { addSampleCode, filename2language } from './utils'
 
@@ -43,6 +45,10 @@ const processOperation = async (page, operationId, codeFiles) => {
     await addSampleCode(page, filename2language(codeFile.filename), nth, codeFile.code)
     nth += 1
   }
+
+  // save
+  const saveButtonSelector = '#sticky0 > div > div > div.col-xs-2 > div > div > div > button'
+  await page.click(saveButtonSelector)
 }
 
 ;(async () => {
@@ -67,11 +73,14 @@ const processOperation = async (page, operationId, codeFiles) => {
   await page.click(loginButtonSelector)
   await page.waitForNavigation({ waitUntil: 'networkidle2' })
 
-  await processOperation(page, 'getversioninfo', [
-    { filename: 'index.py', code: 'print "Hello world"' },
-    { filename: 'index.rb', code: 'puts "Hello world"' },
-    { filename: 'index.js', code: 'console.log("Hello world")' }
-  ])
+  const operations = fs.readdirSync(process.env.SAMPLE_CODE_DIRECTORY)
+  for (const operation of operations) {
+    console.log(operation)
+    let files = fs.readdirSync(path.join(process.env.SAMPLE_CODE_DIRECTORY, operation))
+    files = files.map(file => ({ filename: file, code: fs.readFileSync(path.join(process.env.SAMPLE_CODE_DIRECTORY, operation, file), 'utf-8') }))
+
+    await processOperation(page, operation, files)
+  }
 
   console.log('done')
 })()
