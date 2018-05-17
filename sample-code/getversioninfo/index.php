@@ -1,3 +1,3 @@
 <?PHP
 
-print_r('Hello world');
+print_r('Hello getversioninfo');
