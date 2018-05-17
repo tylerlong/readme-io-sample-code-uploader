@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer'
 import * as R from 'ramda'
 import fs from 'fs'
 import path from 'path'
+import delay from 'timeout-as-promise'
 
 import { addSampleCode, filename2language } from './utils'
 
@@ -49,6 +50,7 @@ const processOperation = async (page, operationId, codeFiles) => {
   // save
   const saveButtonSelector = '#sticky0 > div > div > div.col-xs-2 > div > div > div > button'
   await page.click(saveButtonSelector)
+  await delay(3000) // wait for saving
 }
 
 ;(async () => {
@@ -83,4 +85,5 @@ const processOperation = async (page, operationId, codeFiles) => {
   }
 
   console.log('done')
+  browser.close()
 })()

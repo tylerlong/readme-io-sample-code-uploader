@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node -r babel-polyfill -r babel-register src/index.js && open temp.png",
+    "start": "node -r babel-polyfill -r babel-register src/index.js",
     "test": "jest"
   },
   "dependencies": {
